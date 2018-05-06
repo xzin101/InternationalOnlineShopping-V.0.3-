@@ -11,6 +11,7 @@ namespace InternationalOnlineShopping.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Web;
     using System.Web.Mvc;
@@ -25,15 +26,30 @@ namespace InternationalOnlineShopping.Models
         }
 
         public int ProductId { get; set; }
+
+        [Required(ErrorMessage = "Product name is required")]
+        [Display(Name = "Product Name")]
         public string ProductName { get; set; }
+
+        [Required(ErrorMessage = "Category is required")]
+        [Display(Name = "Category")]
         public Nullable<int> CategoryId { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDelete { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+
+        [Required(ErrorMessage = "Description is required")]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "Product image is required")]
+        [Display(Name = "Product Image")]
         public string ProductImage { get; set; }
+
+        [Required(ErrorMessage = "Price is required")]
         public Nullable<decimal> Price { get; set; }
+
+        [Required(ErrorMessage = "IsFeatured is required")]
         public Nullable<bool> IsFeatured { get; set; }
         public Nullable<int> MemberId { get; set; }
 
