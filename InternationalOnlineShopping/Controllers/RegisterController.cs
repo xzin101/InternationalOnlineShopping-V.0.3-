@@ -121,6 +121,13 @@ namespace InternationalOnlineShopping.Controllers
                     }
                     //result = "Success";
                 }
+                else
+                {
+                   
+                        ModelState.AddModelError("Password", "Invalid username or password");
+                        return View(model);
+                    
+                }
 
                 //else
                 //{
@@ -137,11 +144,13 @@ namespace InternationalOnlineShopping.Controllers
             }
             else
             {
-                if (user != null && user.IsActive == false) ModelState.AddModelError("Password", "Your account in not verified");
-                else ModelState.AddModelError("Password", "Invalid username or password");
+                ModelState.AddModelError("Password", "Invalid username or password");
+                //if (user != null && user.IsActive == false) ModelState.AddModelError("Password", "Your account in not verified");
+                //else ModelState.AddModelError("Password", "Invalid username or password");
+                return View("Index", model);
 
             }
-            return View("Index");
+          
             //else
             //{
             //    if (user != null && user.IsActive == false) ModelState.AddModelError("Password", "Your account in not verified");
