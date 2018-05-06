@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b1d8567c06234ae6926831c5a66f326f" Name="Diagram1" ZoomLevel="92">
+        <EntityTypeShape EntityType="Models.Cart" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.CartStatu" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Category" Width="1.5" PointX="1.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.MemberRole" Width="1.5" PointX="6" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Member" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Product" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Role" Width="1.5" PointX="3.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.ShippingDetail" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="Models.FK__Tbl_Cart__CartSt__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK__Tbl_Cart__Member__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK__Tbl_Cart__Produc__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_Tbl_Category_Tbl_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.fk_Tbl_Member_Tbl_MemberRole" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.fk_Tbl_Roles_Tbl_MemberRole" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Models.Card" Width="1.5" PointX="8.375" PointY="1" />
+        <EntityTypeShape EntityType="Models.Transaction" Width="1.5" PointX="10.625" PointY="1" />
+        <AssociationConnector Association="Models.FK_Cart_Card" />
+        <AssociationConnector Association="Models.FK_Transaction_Card" />
+        <AssociationConnector Association="Models.FK_Product_Members" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

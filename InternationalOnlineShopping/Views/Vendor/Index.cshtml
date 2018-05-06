@@ -1,0 +1,89 @@
+﻿@model IEnumerable<InternationalOnlineShopping.Models.Member>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Vendor List</h2>
+
+<p>
+    @Html.ActionLink("Create New Vendor", "Create")
+</p>
+
+
+
+<table class="table table-striped">
+    <thead bgcolor="#BFC9CA  ">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.EmailId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorName)
+            </th>
+
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorName)
+            </td>
+
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedOn)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MemberId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MemberId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MemberId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    <script>
+        $(function () {
+            let successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage)
+            {
+                alertify.success(successMessage);
+            }
+
+
+
+
+    });
+
+
+
+
+
+
+    </script>
+}

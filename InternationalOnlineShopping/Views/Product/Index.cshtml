@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+}
+@if (Session["MemberId"] != null)
+{
+    <div>
+        <h1 style="float:left;"> Welcome <a href="#">@Session["MemberName"]</a></h1>
+        <h4> <a href="/Home" style="float:right;">Logout</a></h4>
+    </div>
+}
+<ul class="nav nav-tabs">
+        <li><a data-toggle="tab" href="#viewProductsId">View All</a></li>
+    <li class="active"><a data-toggle="tab" href="#addProductId">Add New</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="viewProductsId" class="tab-pane fade in">@Html.Action("ViewAllProducts")</div>
+    <div id="addProductId" class="tab-pane fade in active">@Html.Action("AddOrEdit")</div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
