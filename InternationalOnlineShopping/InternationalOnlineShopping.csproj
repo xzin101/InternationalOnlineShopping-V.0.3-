@@ -280,6 +280,8 @@
     <Content Include="Content\Images\Logo\LOGO.PNG" />
     <Content Include="Content\Images\Logo\LOGO1.png" />
     <Content Include="Content\Images\Logo\LOGO2.png" />
+    <Content Include="Content\Images\Logo\master.png" />
+    <Content Include="Content\Images\Logo\visa-2623015_960_720.png" />
     <Content Include="Content\Images\Products\default_product_image.png" />
     <Content Include="Content\login.css" />
     <Content Include="CSS\adminfonts\roboto-bold-webfont.svg" />
@@ -586,6 +588,8 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Admin\Dashboard.cshtml" />
+    <Content Include="Views\Shopping\CheckOut.cshtml" />
+    <Content Include="Views\Shopping\_ShippingAddress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
