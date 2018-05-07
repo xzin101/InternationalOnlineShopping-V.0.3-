@@ -33,5 +33,13 @@ namespace InternationalOnlineShopping.Controllers
             ("USP_Search @searchKey", new SqlParameter("searchKey", SqlDbType.VarChar) { Value = searchKey }).ToList();
             return View(sr);
         }
+        public ActionResult ProductDetail(int pId)
+        {
+
+            System.Diagnostics.Debug.WriteLine("---");
+            Product pd = unitOfWork.GetRepositoryInstance<Product>().GetFirstOrDefault(pId);
+            ViewBag.SimilarProducts = unitOfWork.GetRepositoryInstance<Product>().GetListByParameter(i => i.CategoryId == pd.CategoryId).ToList();
+            return View(pd);
+        }
     }
 }
