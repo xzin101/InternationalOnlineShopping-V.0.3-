@@ -37,10 +37,10 @@
     <div class="mainCon">
         <!--Start Header-->
         <header class="clearfix">
-            @* <div class="browseCategories">
-            <button type="button" class="categoriesBtn"><img src="/Images/toggleIcon.png" alt="img" /><span>Browse Categories</span></button>
-        </div>
-        <div class="logoBar"><a href="/home/index"><img src="/Images/Logo.jpg" alt="logo" /></a></div>*@
+            <div class="browseCategories">
+                <button type="button" class="categoriesBtn"><img src="/Images/toggleIcon.png" alt="img" /><span>Browse Categories</span></button>
+            </div>
+            @*  <div class="logoBar"><a href="/home/index"><img src="/Images/Logo.jpg" alt="logo" /></a></div>*@
 
             <div class="menuBar">
                 <div class="menuMobile">
@@ -66,7 +66,7 @@
 
 
     <!--Login Popup/Modal-->
-    @*<div class="backBg" id="loginpopup">
+    @*@<div class="backBg" id="loginpopup">
             @{Html.RenderPartial("_Login", new InternationalOnlineShopping.Models.LoginViewModel() { UserEmailId = (Request.Cookies["RememberMe_UserEmailId"] != null ? Request.Cookies["RememberMe_UserEmailId"].Value : ""), Password = (Request.Cookies["RememberMe_Password"] != null ? Request.Cookies["RememberMe_Password"].Value : ""), RememberMe = string.IsNullOrEmpty((Request.Cookies["RememberMe_UserEmailId"] != null ? Request.Cookies["RememberMe_UserEmailId"].Value : "")) ? false : true });}
         </div>*@
     <!--End Popup/Modal-->

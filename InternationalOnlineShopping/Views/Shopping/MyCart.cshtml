@@ -36,28 +36,43 @@
                                 @foreach(var item in Model)
                                 {
                                     <!--Start detailServicesBox-->
-                                    <div class="detailservicesBox clearfix">
-                                        <div class="detailLeft fl">
+                                <div class="detailservicesBox clearfix">
+                                    @*   <div class="detailLeft fl">
                                             <div class="DservicesImg1">
-                                                @if(File.Exists(Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "/Small/" + item.ProductId + "_" + item.ProductImage)))
-                                                {
+                                                                             @if(File.Exists(Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "/Small/" + item.ProductId + "_" + item.ProductImage)))
+           {
                                                     <img style="height: 90px;" src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage"]+"/Small/"+item.ProductId+ "_"+item.ProductImage)" alt="img" />
-                                                }
-                                                else
-                                                {
+        }
+        else
+        {
                                                     <img style="height: 90px;" src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage_Default"])" alt="img" />
-                                                }
+        }
+                                                <img src="@Url.Content(item.ProductImage.ToString())" alt="image" height="100"/>
                                             </div>
-                                        </div>
-                                        <div class="detailRight fr">
-                                            <div class="innerDetails">
-                                                <h1><a title="View Product Detail" href="/search/ProductDetail?pId=@item.ProductId">@item.ProductName</a></h1>
-                                                <h3>Category <a style="cursor:pointer" title="Click to View the products of this category" href="/search/knowbleprofile?pId=@item.ProductId">@(item.ProductName)</a></h3>
-                                                <p><b>Price : </b><b>@item.Price</b></p>
-                                                <p><a href="/shopping/removecartitem?productId=@item.ProductId" onclick="show_progress();" class="RemoveCartBtn">Remove from cart</a></p>
-                                            </div>
+                                        </div>*@
+                                    <div class="detailRight fr"style="width:100%">
+                                        <div class="innerDetails">
+                                            <table>
+                                                <tr>
+                                                    <td>
+
+                                                        <img src="@Url.Content(item.ProductImage.ToString())" alt="image" height="130" />
+
+                                                    </td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    <td>
+                                                        <h1><a title="View Product Detail" href="/search/ProductDetail?pId=@item.ProductId">@item.ProductName</a></h1>
+                                                        <h3>Category <a style="cursor:pointer" title="Click to View the products of this category" href="/search/knowbleprofile?pId=@item.ProductId">@(item.ProductName)</a></h3>
+                                                        <p><b>Price : </b><b>@item.Price</b></p>
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            
+                                            <p><a href="/shopping/removecartitem?productId=@item.ProductId" onclick="show_progress();" class="RemoveCartBtn">Remove from cart</a></p>
                                         </div>
                                     </div>
+                                </div>
                                 }
                             </div>
                         </div>
