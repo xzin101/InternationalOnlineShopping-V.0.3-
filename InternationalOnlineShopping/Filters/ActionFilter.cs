@@ -32,9 +32,9 @@ namespace InternationalOnlineShopping.Filters
                 //case "account":
                 //    controller = (AccountController)filterContext.Controller;
                 //    break;
-                //case "admin":
-                //    controller = (AdminController)filterContext.Controller;
-                //    break;
+                case "admin":
+                   controller = (AdminController)filterContext.Controller;
+                   break;
                 case "shopping":
                 controller = (ShoppingController)filterContext.Controller;
                 break;

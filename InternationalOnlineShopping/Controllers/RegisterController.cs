@@ -130,25 +130,17 @@ namespace InternationalOnlineShopping.Controllers
                 }
 
 
-
-                //else
-                //{
-                //    ModelState.AddModelError("Password", "Invalid username or password");
-                //    return View(model);
-                //}
-
-                //return RedirectToAction("Index", "Product");
-                //ViewBag.redirectUrl = (!string.IsNullOrEmpty(returnUrl) ? HttpUtility.HtmlDecode(returnUrl) : "/");
-
-                // return Json(result, JsonRequestBehavior.AllowGet);
                 if (roles.RoleId == 2)
                 {
                     return RedirectToAction("Index", "Products");
                 }
-                else 
+                else if (roles.RoleId == 1)
                 {
                     return RedirectToAction("Index", "Home");
                 }
+
+                else
+                    return RedirectToAction("Dashboard", "Admin");
                     
             }
             else
