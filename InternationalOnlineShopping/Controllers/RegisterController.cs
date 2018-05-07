@@ -140,7 +140,7 @@ namespace InternationalOnlineShopping.Controllers
 
                 // return Json(result, JsonRequestBehavior.AllowGet);
 
-                return RedirectToAction("Index", "Product");
+                return RedirectToAction("Index", "Products");
             }
             else
             {

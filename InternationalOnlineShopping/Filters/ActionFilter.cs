@@ -3,6 +3,7 @@ using InternationalOnlineShopping.Controllers;
 using InternationalOnlineShopping.Models;
 using InternationalOnlineShopping.Repository;
 using InternationalOnlineShopping.Utility;
+using OnlineShopping.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -34,9 +35,9 @@ namespace InternationalOnlineShopping.Filters
                 //case "admin":
                 //    controller = (AdminController)filterContext.Controller;
                 //    break;
-                //case "shopping":
-                //    controller = (ShoppingController)filterContext.Controller;
-                //    break;
+                case "shopping":
+                controller = (ShoppingController)filterContext.Controller;
+                break;
                 default:
                     controller = (HomeController)filterContext.Controller;
                     break;
