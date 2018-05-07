@@ -22,13 +22,13 @@ namespace InternationalOnlineShopping.Models
         public Product()
         {
             this.Carts = new HashSet<Cart>();
-         //   ProductImage = "~/Content/Images/Products/default_product_image.png";
+            ProductImage = "~/Content/Images/Products/default_product_image.png";
         }
 
         public int ProductId { get; set; }
 
-        //[Required(ErrorMessage = "Product name is required")]
-        //[Display(Name = "Product Name")]
+        [Required(ErrorMessage = "Product name is required")]
+        [Display(Name = "Product Name")]
         public string ProductName { get; set; }
 
         public Nullable<int> CategoryId { get; set; }
@@ -37,16 +37,16 @@ namespace InternationalOnlineShopping.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
 
-        //[Required(ErrorMessage = "Description is required")]
+        [Required(ErrorMessage = "Description is required")]
         public string Description { get; set; }
 
      
         public string ProductImage { get; set; }
 
-        //[Required(ErrorMessage = "Price is required")]
+        [Required(ErrorMessage = "Price is required")]
         public Nullable<decimal> Price { get; set; }
 
-        //[Required(ErrorMessage = "IsFeatured is required")]
+        [Required(ErrorMessage = "IsFeatured is required")]
         public Nullable<bool> IsFeatured { get; set; }
         public Nullable<int> MemberId { get; set; }
 

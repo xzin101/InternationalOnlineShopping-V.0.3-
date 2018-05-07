@@ -6,9 +6,18 @@
 
 
 
-<p>
-    @Html.ActionLink("Create New","Create")
-</p>
+
+@if (Session["MemberId"] != null)
+{
+    <div>
+        <h1 style="float:left;"> Welcome <a href="#">@Session["MemberName"]</a></h1>
+        <h4> <a href="/Home" style="float:right;">Logout</a></h4>
+    </div>
+}
+
+    <p style="margin-top:80px;">
+        @Html.ActionLink("Add New Product", "Create")
+    </p>
 <table class="table table-striped table-condensed">
     <tr>
         <th>

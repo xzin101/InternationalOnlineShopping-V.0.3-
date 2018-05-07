@@ -19,8 +19,20 @@ namespace InternationalOnlineShopping.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            int memberId = Convert.ToInt32(Session["MemberId"]);
-            return View(unitOfWork.GetRepositoryInstance<Product>().GetAllRecordsIQueryable().Where(i => i.IsDelete == false && i.MemberId == memberId).ToList());
+            if (Session["MemberId"] != null)
+            {
+                //return View();
+                int memberId = Convert.ToInt32(Session["MemberId"]);
+                return View(unitOfWork.GetRepositoryInstance<Product>().GetAllRecordsIQueryable().Where(i => i.IsDelete == false && i.MemberId == memberId).ToList());
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Register");
+            }
+
+
+          
         }
 
         // GET: Products/Details/5
