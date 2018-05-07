@@ -14,12 +14,14 @@
             <!--Start servicesdetailsBox-->
             <div class="servicesdetailsBox">
                 @if(File.Exists(Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "Large/" + Model.ProductId + "_" + Model.ProductImage)))
-                {
-                    <img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "Large/" +Model.ProductId+ "_" + Model.ProductImage)" /> }
+                    {
+                            <img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "Large/" +Model.ProductId+ "_" + Model.ProductImage)" /> }
                 else
                 {
-                    <img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage_Default_Large"])" alt="" />
+                            <img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage_Default_Large"])" alt="" />
                 }
+
+                <img src="@Url.Content(@Model.ProductImage.ToString())" alt="image"  height="500" width="500" />
                 <div class="inrfinalServices">
                     <h2>@Model.ProductName</h2>
                     <h3>@Model.Category.CategoryName</h3>
