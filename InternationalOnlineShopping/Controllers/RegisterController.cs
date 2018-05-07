@@ -62,14 +62,14 @@ namespace InternationalOnlineShopping.Controllers
                 memberRole.RoleId = 1;
                 member.VendorName = "N/A";
                 member.RegistrationFee = 0;
-
+                TempData["SuccessMessage"] = "Customer Registered Successfully";
             }
             else
             {
                 memberRole.RoleId = 2;
                 member.FirstName = "N/A";
                 member.LastName = "N/A";
-
+                TempData["SuccessMessage"] = "Vendor Registered Successfully";
             }
             unitOfWork.GetRepositoryInstance<Member>().Add(member);
 
@@ -81,7 +81,7 @@ namespace InternationalOnlineShopping.Controllers
 
 
             unitOfWork.GetRepositoryInstance<MemberRole>().Add(memberRole);
-            TempData["SuccessMessage"] = "Vendor Registered Successfully";
+           
             return RedirectToAction("Index");
 
 
@@ -129,6 +129,8 @@ namespace InternationalOnlineShopping.Controllers
                     
                 }
 
+
+
                 //else
                 //{
                 //    ModelState.AddModelError("Password", "Invalid username or password");
@@ -139,14 +141,22 @@ namespace InternationalOnlineShopping.Controllers
                 //ViewBag.redirectUrl = (!string.IsNullOrEmpty(returnUrl) ? HttpUtility.HtmlDecode(returnUrl) : "/");
 
                 // return Json(result, JsonRequestBehavior.AllowGet);
-
-                return RedirectToAction("Index", "Products");
+                if (roles.RoleId == 2)
+                {
+                    return RedirectToAction("Index", "Products");
+                }
+                else 
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                    
             }
             else
             {
                 ModelState.AddModelError("Password", "Invalid username or password");
                 //if (user != null && user.IsActive == false) ModelState.AddModelError("Password", "Your account in not verified");
                 //else ModelState.AddModelError("Password", "Invalid username or password");
+                TempData["SuccessMessage"] = "Invalid username or password";
                 return View("Index", model);
 
             }
@@ -168,7 +178,7 @@ namespace InternationalOnlineShopping.Controllers
         {
             Session.Clear();
             Session.Abandon();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Home");
         }
         
         

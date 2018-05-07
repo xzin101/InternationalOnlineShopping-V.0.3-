@@ -14,7 +14,7 @@ namespace InternationalOnlineShopping.Controllers
 {
     public class ProductsController : Controller
     {
-        private OnlineShoppingEntities db = new OnlineShoppingEntities();
+      
         public GenericUnitOfWork unitOfWork = new GenericUnitOfWork();
         // GET: Products
         public ActionResult Index()
@@ -42,7 +42,7 @@ namespace InternationalOnlineShopping.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = unitOfWork.GetRepositoryInstance<Product>().GetFirstOrDefaultByParameter(i => i.ProductId == id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -84,6 +84,7 @@ namespace InternationalOnlineShopping.Controllers
                 product.ModifiedDate = DateTime.Now;
                 unitOfWork.GetRepositoryInstance<Product>().Add(product);
                 // return RedirectToAction("ViewAllProducts");
+                TempData["SuccessMessage"] = "Product Added Successfully";
                 return RedirectToAction("Index");
             }
 
@@ -95,17 +96,18 @@ namespace InternationalOnlineShopping.Controllers
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
+            int memberId = Convert.ToInt32(Session["MemberId"]);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = unitOfWork.GetRepositoryInstance<Product>().GetFirstOrDefaultByParameter(i => i.ProductId == id && i.MemberId==memberId && i.IsDelete==false);
             if (product == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", product.CategoryId);
-            ViewBag.MemberId = new SelectList(db.Members, "MemberId", "FirstName", product.MemberId);
+            //ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", product.CategoryId);
+            //ViewBag.MemberId = new SelectList(db.Members, "MemberId", "FirstName", product.MemberId);
             return View(product);
         }
 
@@ -116,14 +118,27 @@ namespace InternationalOnlineShopping.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProductId,ProductName,CategoryId,IsActive,IsDelete,CreatedDate,ModifiedDate,Description,ProductImage,Price,IsFeatured,MemberId")] Product product)
         {
+            //  if (ModelState.IsValid)
+            //  {
+            //      db.Entry(product).State = EntityState.Modified;
+            //      db.SaveChanges();
+            //      return RedirectToAction("Index");
+            //  }
+            //  ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", product.CategoryId);
+            //// ViewBag.MemberId = new SelectList(db.Members, "MemberId", "FirstName", product.MemberId);
+            //  return View(product);
+
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                product.IsDelete = false;
+                product.IsActive = true;
+                unitOfWork.GetRepositoryInstance<Product>().Update(product);
+                unitOfWork.SaveChanges();
+                //db.Entry(member).State = EntityState.Modified;
+                //db.SaveChanges();
+                TempData["SuccessMessage"] = "Updated Successfully";
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", product.CategoryId);
-            ViewBag.MemberId = new SelectList(db.Members, "MemberId", "FirstName", product.MemberId);
             return View(product);
         }
 
@@ -134,7 +149,8 @@ namespace InternationalOnlineShopping.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = unitOfWork.GetRepositoryInstance<Product>().GetFirstOrDefaultByParameter(i => i.ProductId == id);
+            product.IsDelete = true;
             if (product == null)
             {
                 return HttpNotFound();
@@ -147,9 +163,11 @@ namespace InternationalOnlineShopping.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
+            Product product = unitOfWork.GetRepositoryInstance<Product>().GetFirstOrDefaultByParameter(i => i.ProductId == id);
+            product.IsDelete = true;
+            unitOfWork.GetRepositoryInstance<Product>().Update(product);
+            unitOfWork.SaveChanges();
+            TempData["SuccessMessage"] = "Deleted Successfully";
             return RedirectToAction("Index");
         }
 
@@ -157,7 +175,7 @@ namespace InternationalOnlineShopping.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

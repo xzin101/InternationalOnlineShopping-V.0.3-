@@ -45,17 +45,20 @@
             <div class="menuBar">
                 <div class="menuMobile">
                     <ul>
-                        @if(Session["MemberId"] != null)
-                {
-                    <li>Hello @(Request.Cookies["MemberName"] != null && !string.IsNullOrEmpty(Request.Cookies["MemberName"].Value) ? Request.Cookies["MemberName"].Value : "User")</li>
+                        @if (Session["MemberId"] != null)
+    {
+                    <li>Hello @Session["MemberName"]</li>
+                    <li><a href="/Home/Index">Home</a></li>
+                    @*<li>Hello @(Request.Cookies["MemberName"] != null && !string.IsNullOrEmpty(Request.Cookies["MemberName"].Value) ? Request.Cookies["MemberName"].Value : "User")</li>*@
+
                     <li><a href="/shopping/mycart">Cart Items</a></li>
-                    <li><a href="/account/logout">Logout</a></li>
-        }
-        else
-        {
-            @*<li><a href="javascript:void(0)" class="loginpopup">Login</a></li>*@
-            <li><a href="/Register">Login</a></li>
-            @*<li><a href="/Register">Sign Up</a></li>*@
+                    <li><a href="/Register/Logout">Logout</a></li>
+}
+else
+{
+                    @*<li><a href="javascript:void(0)" class="loginpopup">Login</a></li>*@
+                    <li><a href="/Register">Login</a></li>
+                    @*<li><a href="/Register">Sign Up</a></li>*@
 }
                     </ul>
                 </div>

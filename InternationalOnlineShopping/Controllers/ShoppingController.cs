@@ -34,16 +34,26 @@ namespace OnlineShopping.Controllers
         /// <returns></returns>
         public ActionResult AddProductToCart(int productId)
         {
-            Cart c = new Cart();
-            c.AddedOn = DateTime.Now;
-            c.CartStatusId = 1;
-            c.MemberId = memberId;
-            c.ProductId = productId;
-            c.UpdatedOn = DateTime.Now;
-            unitOfWork.GetRepositoryInstance<Cart>().Add(c);
-            unitOfWork.SaveChanges();
-            TempData["ProductAddedToCart"] = "Product added to cart successfully";
-            return RedirectToAction("MyCart","Shopping");
+
+            if (Session["MemberId"] != null)
+            {
+                Cart c = new Cart();
+                c.AddedOn = DateTime.Now;
+                c.CartStatusId = 1;
+                c.MemberId = memberId;
+                c.ProductId = productId;
+                c.UpdatedOn = DateTime.Now;
+                unitOfWork.GetRepositoryInstance<Cart>().Add(c);
+                //unitOfWork.SaveChanges();
+                TempData["ProductAddedToCart"] = "Product added to cart successfully";
+                return RedirectToAction("MyCart", "Shopping");
+
+            }
+            //else
+            //{
+            //    RedirectToAction("Index", "Register");
+            //}
+            return RedirectToAction("Index", "Register"); ;
         }
 
         /// <summary>
