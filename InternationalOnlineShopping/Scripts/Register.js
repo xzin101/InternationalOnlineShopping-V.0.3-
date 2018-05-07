@@ -41,7 +41,7 @@ function SaveVendor(form) {
 }
 
 function Login(form) {
-    debugger;
+   
     $.validator.unobtrusive.parse(form);
     if ($(form).valid()) {
         $.ajax({

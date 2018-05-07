@@ -37,57 +37,39 @@
     <div class="mainCon">
         <!--Start Header-->
         <header class="clearfix">
-            <div class="browseCategories">
-                <button type="button" class="categoriesBtn"><img src="/Images/toggleIcon.png" alt="img" /><span>Browse Categories</span></button>
-            </div>
-            @*<div class="logoBar"><a href="/home/index"><img src="/Images/Logo.jpg" alt="logo" /></a></div>*@
-            
+            @* <div class="browseCategories">
+            <button type="button" class="categoriesBtn"><img src="/Images/toggleIcon.png" alt="img" /><span>Browse Categories</span></button>
+        </div>
+        <div class="logoBar"><a href="/home/index"><img src="/Images/Logo.jpg" alt="logo" /></a></div>*@
+
             <div class="menuBar">
                 <div class="menuMobile">
                     <ul>
-                        @if (Session["MemberId"] != null)
-                        {
-                            <li>Hello @(Request.Cookies["MemberName"] != null && !string.IsNullOrEmpty(Request.Cookies["MemberName"].Value) ? Request.Cookies["MemberName"].Value : "User")</li>
-                            <li><a href="/shopping/mycart">Cart Items</a></li>
-                             <li><a href="/account/logout">Logout</a></li>
-                        }
-                        else
-                        {
-                            @*<li><a href="javascript:void(0)" class="loginpopup">Login</a></li>*@
-                            <li><a href="/Register">Login</a></li>
-                            @*<li><a href="/Register">Sign Up</a></li>*@
-                        }
+                        @if(Session["MemberId"] != null)
+                {
+                    <li>Hello @(Request.Cookies["MemberName"] != null && !string.IsNullOrEmpty(Request.Cookies["MemberName"].Value) ? Request.Cookies["MemberName"].Value : "User")</li>
+                    <li><a href="/shopping/mycart">Cart Items</a></li>
+                    <li><a href="/account/logout">Logout</a></li>
+        }
+        else
+        {
+            @*<li><a href="javascript:void(0)" class="loginpopup">Login</a></li>*@
+            <li><a href="/Register">Login</a></li>
+            @*<li><a href="/Register">Sign Up</a></li>*@
+}
                     </ul>
                 </div>
             </div>
         </header>
-        <div class="categories transition">
-            <ul class="categoriesList">
-                <!--<div class="closeBtn">X Close</div>-->
-                @foreach (var cat in AllCategories)
-                {
-                    <li class="@(AllCategories.Where(i => i.CategoryId == cat.CategoryId).Count() > 0 ? "subcat" : "")">
-                        <a href="/Search/index?searchKey=@cat.CategoryName">@cat.CategoryName</a>
-                        <ul class="subCategories" style="display:@(AllCategories.Where(i => i.CategoryId == cat.CategoryId).Count() > 0  ? "" : "none")">
-                            <h1>All @cat.CategoryName</h1>
-                            @foreach (var p in cat.Products.ToList())
-                            {
-                                <li><a href="/Search/index?searchKey=@p.ProductName">@p.ProductName</a></li>
-                            }
-                        </ul>
-                    </li>
-                }
-            </ul>
-        </div>
-        <!--End Header-->
-        @RenderBody()
+     
+    @RenderBody()
 
 
-        <!--Login Popup/Modal-->
-        @*<div class="backBg" id="loginpopup">
+    <!--Login Popup/Modal-->
+    @*<div class="backBg" id="loginpopup">
             @{Html.RenderPartial("_Login", new InternationalOnlineShopping.Models.LoginViewModel() { UserEmailId = (Request.Cookies["RememberMe_UserEmailId"] != null ? Request.Cookies["RememberMe_UserEmailId"].Value : ""), Password = (Request.Cookies["RememberMe_Password"] != null ? Request.Cookies["RememberMe_Password"].Value : ""), RememberMe = string.IsNullOrEmpty((Request.Cookies["RememberMe_UserEmailId"] != null ? Request.Cookies["RememberMe_UserEmailId"].Value : "")) ? false : true });}
         </div>*@
-        <!--End Popup/Modal-->
+    <!--End Popup/Modal-->
     </div>
     <!--script-->
 
@@ -100,6 +82,6 @@
     <script src="~/Scripts/sweetalert-dev.js"></script>
     <script src="~/Scripts/jquery-ui.js"></script>
     <script src="~/Scripts/datepicker.js"></script>
-    @RenderSection("Scripts", false)
+    @RenderSection("Scripts",false)
 </body>
 </html>

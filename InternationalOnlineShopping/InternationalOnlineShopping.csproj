@@ -188,8 +188,10 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\ProductDetailController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Filters\ActionFilter.cs" />
@@ -532,7 +534,9 @@
     <Content Include="Scripts\tiny_mce\tiny_mce.js" />
     <Content Include="Scripts\tiny_mce\tiny_mce_popup.js" />
     <Content Include="Scripts\tiny_mce\tiny_mce_src.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -571,8 +575,14 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Shared\_FrontLayout.cshtml" />
-    <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\Admin\_AdminLayout.cshtml" />
+    <Content Include="Views\Search\ProductDetail.cshtml" />
+    <Content Include="Views\Shopping\MyCart.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
