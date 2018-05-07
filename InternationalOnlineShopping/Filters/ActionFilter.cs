@@ -26,9 +26,9 @@ namespace InternationalOnlineShopping.Filters
                 case "home":
                     controller = (HomeController)filterContext.Controller;
                     break;
-                //case "search":
-                //    controller = (SearchController)filterContext.Controller;
-                //    break;
+                case "search":
+                    controller = (SearchController)filterContext.Controller;
+                    break;
                 //case "account":
                 //    controller = (AccountController)filterContext.Controller;
                 //    break;
