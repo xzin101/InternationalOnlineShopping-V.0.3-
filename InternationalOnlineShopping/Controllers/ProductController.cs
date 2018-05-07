@@ -47,15 +47,15 @@ namespace InternationalOnlineShopping.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (product.ImageUpload != null)
-                {
-                    string fileName = Path.GetFileNameWithoutExtension(product.ImageUpload.FileName);
-                    string extension = Path.GetExtension(product.ImageUpload.FileName);
-                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    product.ProductImage = "~/Content/Images/Products/" + fileName;
-                    product.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/Products/"), fileName));
+               // if (product.ImageUpload != null)
+               // {
+               //     string fileName = Path.GetFileNameWithoutExtension(product.ImageUpload.FileName);
+               //     string extension = Path.GetExtension(product.ImageUpload.FileName);
+               //     fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+               //     product.ProductImage = "~/Content/Images/Products/" + fileName;
+               //     product.ImageUpload.SaveAs(Path.Combine(Server.MapPath("~/Content/Images/Products/"), fileName));
 
-               }
+               //}
                 product.MemberId = Convert.ToInt32(Session["MemberId"]);
                 product.IsDelete = false;
                 product.IsActive = true;
