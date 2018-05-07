@@ -64,7 +64,24 @@ else
                 </div>
             </div>
         </header>
-     
+        <div class="categories transition">
+            <ul class="categoriesList">
+                <!--<div class="closeBtn">X Close</div>-->
+                @foreach(var cat in AllCategories)
+        {
+            <li class="@(AllCategories.Where(i => i.CategoryId == cat.CategoryId).Count() > 0 ? "subcat" : "")">
+                <a href="#">@cat.CategoryName</a>
+                <ul class="subCategories" style="display:@(AllCategories.Where(i => i.CategoryId == cat.CategoryId).Count() > 0  ? "" : "none")">
+                    <h1>All @cat.CategoryName</h1>
+                    @foreach(var p in cat.Products.ToList())
+            {
+                <li><a href="/Search/index?searchKey=@p.ProductName">@p.ProductName</a></li>
+    }
+                </ul>
+            </li>
+}
+            </ul>
+        </div>
     @RenderBody()
 
 
