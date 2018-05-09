@@ -32,6 +32,8 @@ namespace InternationalOnlineShopping.Controllers
             List<USP_Search_Result> sr = unitOfWork.GetRepositoryInstance<USP_Search_Result>().GetResultBySqlProcedure
             ("USP_Search @searchKey", new SqlParameter("searchKey", SqlDbType.VarChar) { Value = searchKey }).ToList();
             return View(sr);
+            
+            
         }
         public ActionResult ProductDetail(int pId)
         {
