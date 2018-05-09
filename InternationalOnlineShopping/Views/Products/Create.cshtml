@@ -28,6 +28,7 @@
                     <div class="col-md-10">
                         @*@Html.DropDownList("CategoryId",null,htmlAttributes: new { @class = "form-control" })*@
                         @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.CategoryList, "Value", "Text"), "Select Category", new { @class = "form-control" })
+                        
                         @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
                     </div>
                 </div>

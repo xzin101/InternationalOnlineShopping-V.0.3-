@@ -37,6 +37,8 @@ namespace InternationalOnlineShopping.Controllers
             return View(member);
         }
 
+      
+
         // GET: Register/Create
         public ActionResult Create()
         {
