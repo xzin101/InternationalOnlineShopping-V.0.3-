@@ -123,10 +123,11 @@ namespace InternationalOnlineShopping.Controllers
                 }
                 else
                 {
-                   
-                        ModelState.AddModelError("Password", "Invalid username or password");
-                        return View(model);
-                    
+                    //ViewBag.ErrorMsg = "Invalid Username or Password!";
+                    //return View("ErrorTransaction");
+                    ModelState.AddModelError("Password","Invalid username or password");
+                    return View(model);
+
                 }
 
 
@@ -149,7 +150,9 @@ namespace InternationalOnlineShopping.Controllers
                 //if (user != null && user.IsActive == false) ModelState.AddModelError("Password", "Your account in not verified");
                 //else ModelState.AddModelError("Password", "Invalid username or password");
                 TempData["SuccessMessage"] = "Invalid username or password";
-                return View("Index", model);
+                 return View("Index", model);
+                //ViewBag.ErrorMsg = "Invalid Username or Password!";
+                //return View("ErrorLogin");
 
             }
           

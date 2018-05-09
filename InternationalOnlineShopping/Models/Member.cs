@@ -11,8 +11,7 @@ namespace InternationalOnlineShopping.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Member
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,53 +23,20 @@ namespace InternationalOnlineShopping.Models
         }
     
         public int MemberId { get; set; }
-        [Required(ErrorMessage = "First name is required")]
-        [Display(Name ="First Name")]
         public string FirstName { get; set; }
-
-        [Required(ErrorMessage = "Last name is required")]
-        [Display(Name = "Last Name")]
         public string LastName { get; set; }
-
-
-        [Required(ErrorMessage = "Email address is required")]
-        [DataType(DataType.EmailAddress)]
-        [EmailAddress(ErrorMessage = "Invalid email address")]
-        [StringLength(100, ErrorMessage = "Minimum {2} and Maximum {1} characters are allowed", MinimumLength = 5)]
-        [System.Web.Mvc.Remote("IsUserNameAvailable", "Register", ErrorMessage = "Email address is already used")]
         public string EmailId { get; set; }
-
-        [Required(ErrorMessage = "Password is required")]
-        [StringLength(100, ErrorMessage = "Minimum {2} and Maximum {1} characters are allowed", MinimumLength = 5)]
         public string Password { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDelete { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
-
-        [Required(ErrorMessage = "Vendor name is required")]
-        [Display(Name = "Vendor Name")]
         public string VendorName { get; set; }
-
-        [Required(ErrorMessage = "City is required")]
-        
         public string City { get; set; }
-
-        [Required(ErrorMessage = "State is required")]
         public string State { get; set; }
-
-        [Required(ErrorMessage = "Country is required")]
         public string Country { get; set; }
-
-        [Required(ErrorMessage = "Zipcode is required")]
         public string ZipCode { get; set; }
-
-        [Required(ErrorMessage = "Registration fee is required")]
-        [Display(Name = "Registration Fee")]
         public Nullable<double> RegistrationFee { get; set; }
-
-        [Required(ErrorMessage = "Contact number is required")]
-        [Display(Name = "Contact Number")]
         public string ContactNo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

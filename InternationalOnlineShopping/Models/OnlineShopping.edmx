@@ -117,7 +117,7 @@
           <Key>
             <PropertyRef Name="TxnId" />
           </Key>
-          <Property Name="TxnId" Type="int" Nullable="false" />
+          <Property Name="TxnId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CardNo" Type="varchar" MaxLength="45" />
           <Property Name="TxnAmount" Type="int" />
           <Property Name="Availability" Type="int" />
@@ -125,7 +125,7 @@
           <Property Name="Key" Type="bit" />
           <Property Name="PayCard" Type="bit" />
         </EntityType>
-        <Association Name="FK__Cart__CartStatus__48CFD27E">
+        <Association Name="FK__Tbl_Cart__CartSt__571DF1D5">
           <End Role="CartStatus" Type="Self.CartStatus" Multiplicity="0..1" />
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
@@ -137,7 +137,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cart__MemberId__49C3F6B7">
+        <Association Name="FK__Tbl_Cart__Member__5812160E">
           <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
@@ -149,7 +149,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cart__ProductId__4AB81AF0">
+        <Association Name="FK__Tbl_Cart__Produc__59063A47">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
@@ -252,15 +252,15 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShippingDetails" EntityType="Self.ShippingDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Cart__CartStatus__48CFD27E" Association="Self.FK__Cart__CartStatus__48CFD27E">
+          <AssociationSet Name="FK__Tbl_Cart__CartSt__571DF1D5" Association="Self.FK__Tbl_Cart__CartSt__571DF1D5">
             <End Role="CartStatus" EntitySet="CartStatus" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cart__MemberId__49C3F6B7" Association="Self.FK__Cart__MemberId__49C3F6B7">
+          <AssociationSet Name="FK__Tbl_Cart__Member__5812160E" Association="Self.FK__Tbl_Cart__Member__5812160E">
             <End Role="Members" EntitySet="Members" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cart__ProductId__4AB81AF0" Association="Self.FK__Cart__ProductId__4AB81AF0">
+          <AssociationSet Name="FK__Tbl_Cart__Produc__59063A47" Association="Self.FK__Tbl_Cart__Produc__59063A47">
             <End Role="Product" EntitySet="Product" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
@@ -527,10 +527,10 @@
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           <FunctionImport Name="USP_MemberShoppingCartDetails" ReturnType="Collection(Models.USP_MemberShoppingCartDetails_Result)">
-            <Parameter Name="memberId" Mode="In" Type="Int32" />
+          <Parameter Name="memberId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="USP_Search" ReturnType="Collection(Models.USP_Search_Result)">
-            <Parameter Name="searchKey" Mode="In" Type="String" />
+          <Parameter Name="searchKey" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Card">

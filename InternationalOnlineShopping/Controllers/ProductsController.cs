@@ -53,7 +53,7 @@ namespace InternationalOnlineShopping.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            Product product = new Product();
+            Product product = new Product();          
             product.CategoryList = new SelectList(unitOfWork.GetRepositoryInstance<Category>().GetAllRecordsIQueryable(),"CategoryId","CategoryName");
             return View(product);
         }
@@ -64,7 +64,7 @@ namespace InternationalOnlineShopping.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductId,ProductName,CategoryId,IsActive,IsDelete,CreatedDate,ModifiedDate,Description,ProductImage,Price,IsFeatured,MemberId")] Product product, HttpPostedFileBase ImageUpload)
-        {
+        {           
             if(ModelState.IsValid)
             {
                 if(ImageUpload != null)
