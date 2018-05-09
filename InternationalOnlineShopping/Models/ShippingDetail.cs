@@ -22,7 +22,7 @@ namespace InternationalOnlineShopping.Models
         public string Country { get; set; }
         public string ZipCode { get; set; }
         public string OrderId { get; set; }
-        public Nullable<decimal> AmountPaid { get; set; }
+        public decimal AmountPaid { get; set; }
         public string PaymentType { get; set; }
 
         public Card Card { get; set; }

@@ -11,72 +11,73 @@
                 <b>Select Payment Type*</b>
                 <div style="margin-top: 8px;">
                     <label for="radio-2" class="css-label">
-                        @Html.RadioButton("PaymentType", "Pay Using Debit/Credit Card", new { @class = "css-checkbox" })
+                        @Html.RadioButton("PaymentType","Master",new { @class = "css-checkbox" })
                         <a><img src="~/Content/Images/Logo/master.png" style="width:100px; height:100px;" /></a>
                     </label>
                     <label for="radio-2" class="css-label">
-                        @Html.RadioButton("PaymentType", "Pay Using Net banking", new { @class = "css-checkbox" })
-                     <a><img src="~/Content/Images/Logo/visa-2623015_960_720.png" style="width:100px; height:100px;" /></a>
+                        @Html.RadioButton("PaymentType","Visa",new { @class = "css-checkbox" })
+                        <a><img src="~/Content/Images/Logo/visa-2623015_960_720.png" style="width:100px; height:100px;" /></a>
                     </label>
                     @*<label for="radio-2" class="css-label">
-                            @Html.RadioButton("PaymentType","Cash On Delivery",new { @class = "css-checkbox" })
-                            Cash On Delivery
-                        </label>*@
+                    @Html.RadioButton("PaymentType","Cash On Delivery",new { @class = "css-checkbox" })
+                    Cash On Delivery
+                </label>*@
                     @Html.ValidationMessageFor(m => m.PaymentType)
                 </div>
             </div>
 
             <b>Payment Details</b>
+            @Html.HiddenFor(m => m.AmountPaid,new { Value = @ViewBag.TotalPrice })
             <div class="formRow clearfix" style="margin-top: 8px;">
                 <div class="half fl">
                     <label>Card Number*  @Html.ValidationMessageFor(m => m.AddressLine)</label>
-                    @Html.TextBoxFor(m => m.Card.CardNo, new { @class = "inputComn", @placeholder = "Card Number"})
+                    @Html.TextBoxFor(m => m.Card.CardNo,new { @class = "inputComn",@placeholder = "Card Number" })
                 </div>
                 <div class="half fl">
                     <label>Card Holder Name*  @Html.ValidationMessageFor(m => m.AddressLine)</label>
-                    @Html.TextBoxFor(m => m.Card.Name, new { @class = "inputComn", @placeholder = "Card Holder Name" })
+                    @Html.TextBoxFor(m => m.Card.Name,new { @class = "inputComn",@placeholder = "Card Holder Name" })
                 </div>
-                </div>
-                <div class="formRow clearfix" style="margin-top: 8px;">
-                    <div class="half fl">
-                        <label>CCV*  @Html.ValidationMessageFor(m => m.AddressLine)</label>
-                        @Html.TextBoxFor(m => m.Card.Ccv, new { @class = "inputComn", @placeholder = "CCV" })
-                    </div>
-                    <div class="half fl">
-                        <label>Expiration Date*  @Html.ValidationMessageFor(m => m.AddressLine)</label>
-                        @Html.TextBoxFor(m => m.Card.Exp, new { @class = "inputComn", @placeholder = "Expiration Date" })
-                    </div>
-                </div>
-
-
-                <b>Shipping Address</b>
-                <div class="formRow clearfix" style="margin-top: 8px;">
-                    <label>Address*  @Html.ValidationMessageFor(m => m.AddressLine)</label>
-                    @Html.TextBoxFor(m => m.AddressLine, new { @class = "inputComn", @placeholder = "Address" })
-                </div>
-
-                <div class="formRow clearfix">
-                    <div class="half fl">
-                        <label>City*  @Html.ValidationMessageFor(m => m.City)</label>
-                        @Html.TextBoxFor(m => m.City, new { @class = "inputComn", @placeholder = "City" })
-                    </div>
-                    <div class="half fr">
-                        <label>State*  @Html.ValidationMessageFor(m => m.State)</label>
-                        @Html.TextBoxFor(m => m.State, new { @class = "inputComn", @placeholder = "State" })
-                    </div>
-                </div>
-
-                <div class="formRow clearfix">
-                    <div class="half fl">
-                        <label>Country*  @Html.ValidationMessageFor(m => m.Country)</label>
-                        @Html.TextBoxFor(m => m.Country, new { @class = "inputComn", @placeholder = "Country" })
-                    </div>
-                    <div class="half fr">
-                        <label>Zip Code*  @Html.ValidationMessageFor(m => m.ZipCode)</label>
-                        @Html.TextBoxFor(m => m.ZipCode, new { @class = "inputComn", @placeholder = "Zip Code" })
-                    </div>
-                </div>
-                <input type="submit" class="contactBtn signupBtn" value="Proceed to Pay" />
             </div>
+            <div class="formRow clearfix" style="margin-top: 8px;">
+                <div class="half fl">
+                    <label>CCV*  @Html.ValidationMessageFor(m => m.AddressLine)</label>
+                    @Html.TextBoxFor(m => m.Card.Ccv,new { @class = "inputComn",@placeholder = "CCV" })
+                </div>
+                <div class="half fl">
+                    <label>Expiration Date*  @Html.ValidationMessageFor(m => m.AddressLine)</label>
+                    @Html.TextBoxFor(m => m.Card.Exp,new { @class = "inputComn",@placeholder = "Expiration Date" })
+                </div>
+            </div>
+
+
+            <b>Shipping Address</b>
+            <div class="formRow clearfix" style="margin-top: 8px;">
+                <label>Address*  @Html.ValidationMessageFor(m => m.AddressLine)</label>
+                @Html.TextBoxFor(m => m.AddressLine,new { @class = "inputComn",@placeholder = "Address" })
+            </div>
+
+            <div class="formRow clearfix">
+                <div class="half fl">
+                    <label>City*  @Html.ValidationMessageFor(m => m.City)</label>
+                    @Html.TextBoxFor(m => m.City,new { @class = "inputComn",@placeholder = "City" })
+                </div>
+                <div class="half fr">
+                    <label>State*  @Html.ValidationMessageFor(m => m.State)</label>
+                    @Html.TextBoxFor(m => m.State,new { @class = "inputComn",@placeholder = "State" })
+                </div>
+            </div>
+
+            <div class="formRow clearfix">
+                <div class="half fl">
+                    <label>Country*  @Html.ValidationMessageFor(m => m.Country)</label>
+                    @Html.TextBoxFor(m => m.Country,new { @class = "inputComn",@placeholder = "Country" })
+                </div>
+                <div class="half fr">
+                    <label>Zip Code*  @Html.ValidationMessageFor(m => m.ZipCode)</label>
+                    @Html.TextBoxFor(m => m.ZipCode,new { @class = "inputComn",@placeholder = "Zip Code" })
+                </div>
+            </div>
+            <input type="submit" class="contactBtn signupBtn" value="Proceed to Pay" />
+        </div>
     </div>
 }

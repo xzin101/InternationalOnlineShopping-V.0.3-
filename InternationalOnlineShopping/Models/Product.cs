@@ -13,7 +13,6 @@ namespace InternationalOnlineShopping.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web;
     using System.Web.Mvc;
 
     public partial class Product
@@ -24,41 +23,27 @@ namespace InternationalOnlineShopping.Models
             this.Carts = new HashSet<Cart>();
             ProductImage = "~/Content/Images/Products/default_product_image.png";
         }
-
+    
         public int ProductId { get; set; }
-
-        [Required(ErrorMessage = "Product name is required")]
-        [Display(Name = "Product Name")]
+        //[Required]
         public string ProductName { get; set; }
-
         public Nullable<int> CategoryId { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDelete { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-
-        [Required(ErrorMessage = "Description is required")]
+        //[Required]
         public string Description { get; set; }
-
-     
         public string ProductImage { get; set; }
-
-        [Required(ErrorMessage = "Price is required")]
+        //[Required]
         public Nullable<decimal> Price { get; set; }
-
-        [Required(ErrorMessage = "IsFeatured is required")]
         public Nullable<bool> IsFeatured { get; set; }
         public Nullable<int> MemberId { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual Category Category { get; set; }
         public virtual Member Member { get; set; }
-
-
-        //[NotMapped]
-        //public HttpPostedFileBase ImageUpload { get; set; }
-
         [NotMapped]
         public SelectList CategoryList { get; set; }
     }
