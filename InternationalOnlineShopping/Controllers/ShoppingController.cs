@@ -8,7 +8,7 @@ using InternationalOnlineShopping.Models;
 using System.Data.SqlClient;
 using System.Data;
 using InternationalOnlineShopping.Filters;
-
+using InternationalOnlineShopping.Utility;
 
 namespace OnlineShopping.Controllers
 {
@@ -101,33 +101,122 @@ namespace OnlineShopping.Controllers
         /// <param name="shippingDetails"></param>
         /// <returns></returns>
         ///   
-        /*
+        public Tuple<Boolean,String> PaymentCheck(ShippingDetail shippingDetail)
+        {
+            System.Diagnostics.Debug.WriteLine(shippingDetail.Card.CardNo);
+     
+            //string cardno = shippingDetail.Card.CardNo;
+            string encryptedCardNumber = EncryptDecrypt.Encrypt(shippingDetail.Card.CardNo,true);
+            string CCV = EncryptDecrypt.Encrypt(shippingDetail.Card.Ccv,true);
+
+
+            decimal amountWithTax = shippingDetail.AmountPaid * (decimal)1.07;
+         
+
+            //   var existCard = unitOfWork.GetRepositoryInstance<Card>().GetFirstOrDefaultByParameter(i => 1 == 1);
+            var existCard = unitOfWork.GetRepositoryInstance<Card>().GetFirstOrDefaultByParameter(i => i.CardNo == encryptedCardNumber && i.Ccv == CCV);
+            if(existCard == null)               
+            {
+                return Tuple.Create(false,"Invalid Card Number !!");
+            }
+            else
+            {
+                int firstCardValue = Convert.ToInt32(existCard.CardValue);
+                //card number match
+
+                List<Transaction>transactions = unitOfWork.GetRepositoryInstance<Transaction>().GetAllRecordsIQueryable().Where(i => i.CardNo == encryptedCardNumber).ToList();
+                if(transactions.Count == 0)
+                {
+                    if(shippingDetail.AmountPaid < existCard.CardValue)
+                    {
+                        //transaction approved for the first time 
+                        Transaction transaction = new Transaction();
+                        transaction.CardNo = encryptedCardNumber;
+                        transaction.TxnAmount = Convert.ToInt32(amountWithTax);
+                        transaction.Availability = Convert.ToInt32(firstCardValue - amountWithTax);
+                        transaction.UsedAcount = Convert.ToInt32(shippingDetail.AmountPaid);
+                        transaction.Key = true;
+                        transaction.PayCard = true;
+                        unitOfWork.GetRepositoryInstance<Transaction>().Add(transaction);
+
+                        //unitOfWork.GetRepositoryInstance<ShippingDetail>().Add(shippingDetail);
+
+                    }
+                    else
+                    {
+                        //you dont have sufficient balance 
+                       return Tuple.Create(false,"You dont' have sufficient amount for transaction !");
+                    }
+                }
+                else
+                {
+                    //  Transaction transaction=
+                    // if the transcation is already there where card no is same
+                    Transaction transactionsLast = unitOfWork.GetRepositoryInstance<Transaction>().GetAllRecords().Where(i => i.CardNo == existCard.CardNo && i.Key == true).Last();
+
+                    if(shippingDetail.AmountPaid < transactionsLast.Availability)
+                    {
+                        //transaction approved
+                        Transaction transaction = new Transaction();
+                        transaction.CardNo = encryptedCardNumber;
+
+                        transaction.TxnAmount = Convert.ToInt32(amountWithTax);                       
+                        transaction.Availability = Convert.ToInt32(transactionsLast.Availability - amountWithTax);
+                        transaction.UsedAcount = transactionsLast.UsedAcount + Convert.ToInt32(amountWithTax);
+                        transaction.Key = true;
+                        transaction.PayCard = true;
+                        unitOfWork.GetRepositoryInstance<Transaction>().Add(transaction);
+                       // unitOfWork.GetRepositoryInstance<ShippingDetail>().Add(shippingDetail);
+
+                    }
+                    else
+                    {
+                        //you dont have sufficient balance 
+                        return Tuple.Create(false,"You dont' have sufficient amount for transaction !");
+                    }
+                    
+
+                }
+                 return Tuple.Create(true,"");                
+              }        
+        }
+
+
         public ActionResult PaymentSuccess(ShippingDetail shippingDetail)
         {
-          
-            ShippingDetail sd = new ShippingDetail();
-            sd.MemberId = memberId;
-            sd.AddressLine = shippingDetail.Address;
-            sd.City = shippingDetail.City;
-            sd.State = shippingDetail.State;
-            sd.Country = shippingDetail.Country;
-            sd.ZipCode = shippingDetail.ZipCode;
-            sd.OrderId = Guid.NewGuid().ToString();
-            sd.AmountPaid = shippingDetail.TotalPrice;
-            sd.PaymentType = shippingDetail.PaymentType;
-            unitOfWork.GetRepositoryInstance<ShippingDetail>().Add(sd);
-            unitOfWork.GetRepositoryInstance<Cart>().UpdateByWhereClause(i => i.MemberId == memberId && i.CartStatusId == 1,(j => j.CartStatusId = 3));
-            unitOfWork.SaveChanges();
-            if(!string.IsNullOrEmpty(Request["CartIds"]))
+            if(PaymentCheck(shippingDetail).Item1 == false)
             {
-                int[] cartIdsToUpdate = Request["CartIds"].Split(',').Select(Int32.Parse).ToArray();
-                unitOfWork.GetRepositoryInstance<Cart>().UpdateByWhereClause(i => cartIdsToUpdate.Contains(i.CartId),(j => j.ShippingDetailId = sd.ShippingDetailId));
-                unitOfWork.SaveChanges();
-
+                ViewBag.ErrorMsg = PaymentCheck(shippingDetail).Item2;
+                return View("ErrorTransaction");
             }
-            
-            return View(sd);
+            else
+            {
+                ShippingDetail sd = new ShippingDetail();
+                sd.MemberId = memberId;
+                sd.AddressLine = shippingDetail.AddressLine;
+                sd.City = shippingDetail.City;
+                sd.State = shippingDetail.State;
+                sd.Country = shippingDetail.Country;
+                sd.ZipCode = shippingDetail.ZipCode;
+                sd.OrderId = Guid.NewGuid().ToString();
+
+                decimal amountWithTax = shippingDetail.AmountPaid * (decimal)1.07;
+                sd.AmountPaid = amountWithTax;
+                sd.PaymentType = shippingDetail.PaymentType;
+                unitOfWork.GetRepositoryInstance<ShippingDetail>().Add(sd);
+                unitOfWork.GetRepositoryInstance<Cart>().UpdateByWhereClause(i => i.MemberId == memberId && i.CartStatusId == 1,(j => j.CartStatusId = 3));
+                unitOfWork.SaveChanges();
+                if(!string.IsNullOrEmpty(Request["CartIds"]))
+                {
+                    int[] cartIdsToUpdate = Request["CartIds"].Split(',').Select(Int32.Parse).ToArray();
+                    unitOfWork.GetRepositoryInstance<Cart>().UpdateByWhereClause(i => cartIdsToUpdate.Contains(i.CartId),(j => j.ShippingDetailId = sd.ShippingDetailId));
+                    unitOfWork.SaveChanges();
+                }
+                return View(sd);
+            }
+         
+
         }
-        */
+        
     }
 }

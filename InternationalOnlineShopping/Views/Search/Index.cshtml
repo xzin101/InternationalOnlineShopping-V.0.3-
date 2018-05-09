@@ -39,12 +39,14 @@
                                         @foreach (var item in Model)
                                         {
                                             <li>
-                                                <!--Start ServicesBox-->                                                 <div class="servicesBox">
+                                                <!--Start ServicesBox-->                                                
+                                                <div class="servicesBox">
                                                     <div class="servicesImg">
-                                                        @if (File.Exists(Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "/Medium/" + item.ProductId + "_" + item.ProductImage)))
-                                                        {<img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage"]+"/Medium/"+item.ProductId+ "_"+item.ProductImage)" alt="img"> }
-                                                        else
-                                                        { <img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage_Default"])" alt="img">}
+                                                        <img src="@Url.Content(item.ProductImage)" alt="image" height="50" width="50" />
+                                                        @*@if (File.Exists(Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "/Medium/" + item.ProductId + "_" + item.ProductImage)))
+        {<img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage"]+"/Medium/"+item.ProductId+ "_"+item.ProductImage)" alt="img"> }
+        else
+        { <img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage_Default"])" alt="img">}*@
                                                     </div>                                                     <div class="nameLink">                                                         <a title="View Product" href="/search/productDetail?pId=@item.ProductId">@item.ProductName</a>                                                         <div class="byperson clearfix">                                                             <h3>Category: @item.CategoryName</h3>                                                         </div>                                                     </div>                                                     <div class="rate clearfix">                                                         <span class="fl">Price</span>                                                         <span class="blueClr fr">@item.Price</span>                                                     </div>
                                                 </div>                                                 <!--End ServicesBox-->
                                             </li>
@@ -62,7 +64,7 @@
 @section Scripts{
     <script type="text/javascript">
          $(document).ready(function () {
-            debugger
+   
         if('@TempData["ProductAddedToCart"]'!='')
         {
          swal('@TempData["ProductAddedToCart"]', '', 'success');
