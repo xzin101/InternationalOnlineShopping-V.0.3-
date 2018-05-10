@@ -9,7 +9,8 @@ using System.Data.SqlClient;
 using System.Data;
 using InternationalOnlineShopping.Filters;
 using InternationalOnlineShopping.Utility;
-
+using Postal;
+using InternationalOnlineShopping;
 namespace OnlineShopping.Controllers
 {
     [FrontPageActionFilter]
@@ -212,6 +213,14 @@ namespace OnlineShopping.Controllers
                     unitOfWork.GetRepositoryInstance<Cart>().UpdateByWhereClause(i => cartIdsToUpdate.Contains(i.CartId),(j => j.ShippingDetailId = sd.ShippingDetailId));
                     unitOfWork.SaveChanges();
                 }
+
+                // SMTP sending email confirmation to customer
+                Member member = unitOfWork.GetRepositoryInstance<Member>().GetFirstOrDefaultByParameter(i => i.MemberId == (int)Session["MemberId"]);
+                
+                dynamic email = new Email("Success");
+                email.To = member.EmailId;
+                email.Name = member.FirstName;
+                email.Send();
                 return View(sd);
             }
          
