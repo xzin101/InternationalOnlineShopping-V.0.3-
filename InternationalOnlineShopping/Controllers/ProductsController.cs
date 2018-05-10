@@ -23,6 +23,7 @@ namespace InternationalOnlineShopping.Controllers
             {
                 //return View();
                 int memberId = Convert.ToInt32(Session["MemberId"]);
+                //ViewBag.Categories = new SelectList(unitOfWork.GetRepositoryInstance<Category>().GetAllRecords(),"CategoryId","CategoryName");
                 return View(unitOfWork.GetRepositoryInstance<Product>().GetAllRecordsIQueryable().Where(i => i.IsDelete == false && i.MemberId == memberId).ToList());
 
             }
